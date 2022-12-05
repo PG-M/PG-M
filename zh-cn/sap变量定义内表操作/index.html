@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ABAP变量定义内表操作 - Mr.xiao的博客</title><meta name="Description" content="ABAP变量定义内表操作"><meta property="og:title" content="ABAP变量定义内表操作" />
+<meta property="og:description" content="ABAP变量定义内表操作" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" /><meta property="og:image" content="https://pg-m.github.io/logo.png"/><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Mr.xiao的博客" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://pg-m.github.io/logo.png"/>
+
+<meta name="twitter:title" content="ABAP变量定义内表操作"/>
+<meta name="twitter:description" content="ABAP变量定义内表操作"/>
+<meta name="application-name" content="Mr.xiao的网站">
+<meta name="apple-mobile-web-app-title" content="Mr.xiao的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" /><link rel="next" href="https://pg-m.github.io/zh-cn/sap%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ABAP变量定义内表操作",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/pg-m.github.io\/zh-cn\/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C\/"
+        },"genre": "posts","keywords": "SAP ABAP","wordcount":  2402 ,
+        "url": "https:\/\/pg-m.github.io\/zh-cn\/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Mr.xiao"
+            },"description": "ABAP变量定义内表操作"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/zh-cn/" title="Mr.xiao的博客">wide</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/zh-cn/posts/"> 文章 </a><a class="menu-item" href="/zh-cn/tags/"> 标签 </a><a class="menu-item" href="/zh-cn/categories/"> 分类 </a><a class="menu-item" href="/zh-cn/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" selected>简体中文</option><option value="/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/">English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/zh-cn/" title="Mr.xiao的博客">wide</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/zh-cn/posts/" title="">文章</a><a class="menu-item" href="/zh-cn/tags/" title="">标签</a><a class="menu-item" href="/zh-cn/categories/" title="">分类</a><a class="menu-item" href="/zh-cn/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" selected>简体中文</option><option value="/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/">English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ABAP变量定义内表操作</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/zh-cn/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Mr.xiao</a></span>&nbsp;<span class="post-category">收录于 <a href="/zh-cn/categories/sap/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SAP</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2402 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><ul>
+<li>
+<p>数据类型与数据对象</p>
+<ul>
+<li>
+<p>在ABAP语句中，使用变量之前，必须针对变量进行声明。声明过程中，会涉及到以下两个概念：</p>
+<ul>
+<li>
+<p>数据类型</p>
+<ul>
+<li>
+<p>数据类型描述了数据对象的技术属性（类型和长度），用于定义数据对象</p>
+</li>
+<li>
+<p>本身不能被直接引用或赋值</p>
+</li>
+<li>
+<p>数据元素（Data Element）：用于定义一个字段类型的变量</p>
+</li>
+<li>
+<p>结构体（Structure）：用于定义一个内存中的结构体变量</p>
+</li>
+<li>
+<p>内表类型（Table Type）：用于定义一个内存中的内表</p>
+</li>
+<li>
+<p>数据类型分类</p>
+<ul>
+<li>
+<p>全局类型（数据字典中创建的类型）DATA ELEMENT</p>
+<ul>
+<li>
+<p>STRUCTURE</p>
+</li>
+<li>
+<p>TABLE TYPE</p>
+</li>
+</ul>
+</li>
+<li>
+<p>标准类型（C ,N,D,T,F,I,P,STRING）</p>
+</li>
+<li>
+<p>局部类型（程序中单独声明的类型）</p>
+<ul>
+<li>
+<p>DATA TYPE</p>
+</li>
+<li>
+<p>STRUCTURE TYPE</p>
+</li>
+<li>
+<p>TABLE TYPE</p>
+</li>
+</ul>
+</li>
+<li>
+<p>类型创建基本语句</p>
+<ul>
+<li>
+<p>TYPE OBJ[TYPE 类型 | LIKE 对象.</p>
+</li>
+<li>
+<p>例：TYPE gty_char TYPE  C LENGTH 10 （定义了一个CHAR类型长度为10的类型）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>数据对象</p>
+<ul>
+<li>
+<p>数据对象（如文本、变量、常量）</p>
+</li>
+<li>
+<p>DATA关键字用来声明的变量或者实体结构具有实际的内存空间</p>
+</li>
+<li>
+<p>系统标准参数</p>
+<ul>
+<li>
+<p>系统定义的数据对象无需声明，可以在程序中直接使用（结构SYST中）</p>
+</li>
+<li>
+<p>SY-SUBRC：返回代码值（上一步操作是否成功，成功为0，失败非0）</p>
+</li>
+<li>
+<p>SY-UNMAE：当前用户名</p>
+</li>
+<li>
+<p>SY-TCODE：当前事务</p>
+</li>
+<li>
+<p>SY-DATUM：当前日期</p>
+</li>
+<li>
+<p>SY-UZEIT：当前时间</p>
+</li>
+<li>
+<p>SY-REPID：当前程序名</p>
+</li>
+<li>
+<p>SY-TABIX：内表的第几行</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>变量的声明</p>
+<ul>
+<li>
+<p>变量声明基本语句</p>
+<ul>
+<li>
+<p>DATA obj1 [TYPE type1 |  LIKE obj1]  [value value1]</p>
+<ul>
+<li>
+<p>例：DATA gv_char1 TYPE C LENGTH 10 .</p>
+</li>
+<li>
+<p>DATA gv_char2 TYPE  gth_char.</p>
+</li>
+<li>
+<p>DATA gv_char3  LIKE gv_char2.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>常量的声明</p>
+<ul>
+<li>CONSTANTS  例：C_CHAR TYPE C LENGTH 10  VALUE &lsquo;ABC&rsquo;.（必须带VALUE后缀）</li>
+</ul>
+</li>
+<li>
+<p>文本文字</p>
+<ul>
+<li>
+<p>硬编码：单引号使用</p>
+</li>
+<li>
+<p>使用文本元素（TEXT ELEMENT）</p>
+</li>
+<li>
+<p>数字文字：不需要单引号，直接使用</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>结构类型及结构的定义</p>
+<ul>
+<li>
+<p>结构类型属于一种复杂类型，由多个数据元素作为组件组成，参照结构类型生成的数据对象称为结构体</p>
+</li>
+<li>
+<p>使用TYPES和DATA语句构造内部的结构体的语法格式如下：</p>
+<ul>
+<li>
+<p>可以使用&rsquo;-&lsquo;符号访问结构体对象各组件：structure-field</p>
+</li>
+<li>
+<p>TABLES语句，声明一个和数据库表名称完全相同的结构</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>表类型及内表的定义</p>
+<ul>
+<li>
+<p>表类型是ABAP中的另外一种复杂类型，该类型的数据对象称为内表。表类型跟结构体类型相似。内表所占的内存不能再定义时确定，他会随着数据的增加不断的扩充它所需要的内存</p>
+</li>
+<li>
+<p>在程序中，内表可以通过TYPE/DATA语句中的Table of附加项进行构造：TYPES | DATA:itab TYPE | LIKE tabkind OF linetype  [WITH KEY] [INITIAL SIZE n]</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>赋值方法</p>
+<ul>
+<li>
+<p>=号赋值 例：    GT_DATA1 = GT_DATA2</p>
+</li>
+<li>
+<p>MOVE TO   例：MOVE GT_DATA2 TO GT_DATA1</p>
+</li>
+<li>
+<p>WRITE  例：      WRITE GT_DATA2 TO GT_DATA1</p>
+<ul>
+<li>注意使用WRITE进行赋值的时候，后面的不能是I类型或 者P类型</li>
+</ul>
+</li>
+<li>
+<p>结构的赋值</p>
+<ul>
+<li>
+<p>MOVE STR1 TO STR 2nm</p>
+</li>
+<li>
+<p>MOVE-CONRRESPONDING STR1 TO STR2</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>内表</p>
+<ul>
+<li>
+<p>内表的分类</p>
+<ul>
+<li>
+<p>标准表（STANDARD TABLE）</p>
+<ul>
+<li>
+<p>系统为该表每一行生成一个逻辑索引，填充表时可以将数据附加再现有行之后，也可以插入到指定的位置，程序对内表的寻址可以通过关键字或者索引进行，再对表进行插入，删除等操作时，各行数据在内表的位置不变，系统进为重新排列各数据的索引值</p>
+</li>
+<li>
+<p>DATA : itab TYPE [STANDARD] TABLE OF linetype</p>
+</li>
+</ul>
+</li>
+<li>
+<p>排序表(SORTED TABLE）</p>
+<ul>
+<li>
+<p>也具有为该表每一行生成一个逻辑索引，不同之处是排序表总是按期表关键字升序排序后在进行存储，其访问方式与标准表相同</p>
+</li>
+<li>
+<p>DATA:itab TYPE SORTED TABLE OF linetype WITH UNIQUE | NON-UNIQUE KEY keyname</p>
+</li>
+</ul>
+</li>
+<li>
+<p>哈希表（HASHED TABLE）</p>
+<ul>
+<li>
+<p>没有索引，只能通过关键字来访问，系统用哈希算法来管理表中的数</p>
+</li>
+<li>
+<p>DATA:itab TYPE HASHED TABLE OF linetype WITH UNIQUE KEY keyname</p>
+</li>
+</ul>
+</li>
+<li>
+<p>另外，还有一般类型表：INDEX TABLE 和 任意表：ANY TABLE</p>
+<ul>
+<li>这两种表类型可以定义数据类型，但是不能生成数据对象，数据对象一般实在程序中动态指定的，一般是在Perform程序块或者是Field Symbols里使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>和内表对应的结构体又叫工作区</p>
+</li>
+<li>
+<p>表头行</p>
+<ul>
+<li>
+<p>在创建内表的同时可以使用选线 With header line 隐式的定义了一个工作表头行，也称作内表工作区</p>
+</li>
+<li>
+<p>DATA :itab TYPE tabletype WITH HEADER LINE.</p>
+</li>
+<li>
+<p>用以上语句创建内表的同时就隐含的创建了一个内表的工作区</p>
+<ul>
+<li>
+<p>内表的引用方法：itab[]</p>
+</li>
+<li>
+<p>工作区的引用方法 itab</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>内表数据的操作</p>
+<ul>
+<li>
+<p>内表数据的增加</p>
+<ul>
+<li>
+<p>追加&ndash;APPEND</p>
+<ul>
+<li>
+<p>APPEND 相当于在内表的最后追加一行，他只能使用在索引表中且最好是标准表。而标准表是ABAP编程中最常用的表，所以这个语句很重要</p>
+</li>
+<li>
+<p>APPEND[line | INITIAL LINE] TO itab. （插入一个空行）</p>
+</li>
+<li>
+<p>APPEND LINES OF itab1[FORM n1][TO n2] TO itab2. (line:结构；itab：内表；idx索引值）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>插入-INSERT</p>
+<ul>
+<li>
+<p>将行插入到内表中指定的位置，需要使用INSERT语句。对于索引表，可以指定某行的索引，则新航将插入到改索引所代表的行之前；对于哈希表，不能指定行的索引，系统会按照关键字将新行插入其特殊位置。给内表插入行可以为单行，也可以为多行，甚至可以把整个内表的数据插入到其他内表中。</p>
+</li>
+<li>
+<p>按照索引值插入（只能用于索引表）</p>
+<ul>
+<li>INSERT line INTO itab INDEX idx</li>
+</ul>
+</li>
+<li>
+<p>按照关键字插入（可以用于所有表）</p>
+<ul>
+<li>INSERT line INTO TABLE table</li>
+</ul>
+</li>
+<li>
+<p>多行插入</p>
+<ul>
+<li>INSERT LINES OF itab1 [FORM n1][TO ne] INTO [TABLE] itab2 [INDEX idx]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>聚集附加&ndash;COLLECT</p>
+<ul>
+<li>
+<p>这个语句的作用是将工作区里的关键字段值跟内表里的字段比较，如果相同的话不在内表里追加行，而是将工作区里的数值字段值跟内表里的相关行的字段值累加，然后将工作区里的数字值更新到内表的相关行里；如果比较后没有在内表里找到相关行就将工作区里的内容添加到内表里。</p>
+</li>
+<li>
+<p>COLLECT line INTO ITAB</p>
+</li>
+<li>
+<p>COLLECT实际运用中1oop的内表不需要排序，直接1oop累加计算。</p>
+</li>
+<li>
+<p>只有在 COLLECT 命令的所有非关键宇段均为数字（类型！P 或F)时才可在表中使用该命令。numeric (type l, P. or F)</p>
+</li>
+<li>
+<p>使用collect就要求所有的非key fields均是！,P或者F数据类型，另外要注意的是对于standard table而言，如果不指定key fields那么它的key fields就那些非1，P,F数据类型的fields, sorted table 和hashtable均必须指定key fields.</p>
+</li>
+<li>
+<p>注意：货币类型CURR实际类型是P，所以也可以使用collect累加</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>内表数据的修改</p>
+<ul>
+<li>
+<p>MODIFY</p>
+<ul>
+<li>
+<p>根据索引更改内表的语法如下；</p>
+</li>
+<li>
+<p>MODIFY iitab[FORM wa] [INDEX idx] [TRANSPORTING f1 f2 &hellip;]</p>
+</li>
+<li>
+<p>使用表关键字来更改内表行可以应用于所有类型的内表，语法如下；</p>
+</li>
+<li>
+<p>MODIFY TABLE itab FROM wa [TRANSPORTING f1 f2&hellip;]</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>附</p>
+<ul>
+<li>
+<p>char类型去空格</p>
+<ul>
+<li>
+<p>去前空格：CONDENSE  str</p>
+</li>
+<li>
+<p>去左空格：SHIFT lv_value LEFT DELETING LEADING SPACE.</p>
+</li>
+<li>
+<p>去右空格：SHIFT lv_value RIGHT DELETING LEADING SPACE.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" data-title="ABAP变量定义内表操作" data-hashtags="SAP ABAP"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" data-hashtag="SAP ABAP"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" data-title="ABAP变量定义内表操作"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" data-title="ABAP变量定义内表操作"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://pg-m.github.io/zh-cn/sap%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%86%85%E8%A1%A8%E6%93%8D%E4%BD%9C/" data-title="ABAP变量定义内表操作"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/zh-cn/tags/sap-abap/">SAP ABAP</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/zh-cn/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/zh-cn/sap%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" class="next" rel="next" title="SAP数据字典">SAP数据字典<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.95.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/zh-cn/" target="_blank">Mr.xiao</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":[""],"clientID":"e6a5e14c141f431f55bc","clientSecret":"8c080a1a18d5f525d0bd05f225aac52f6f92bf4b","id":"0001-01-01T00:00:00Z","owner":"","repo":"pg-m","title":"ABAP变量定义内表操作"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/zh-cn/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
